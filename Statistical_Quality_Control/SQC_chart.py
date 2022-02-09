@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 #%matplotlib inline
 
-def xbar_chart(D, thread_val):
+def xbar_chart(D, A2):
     m = D.shape[0]
     x_bar = []
     R = []
@@ -13,8 +13,8 @@ def xbar_chart(D, thread_val):
         R.append(mi.max() - mi.min())
 
     M = np.mean(x_bar)
-    UCL = M + thread_val * np.mean(R)
-    LCL = M - thread_val * np.mean(R)
+    UCL = M + A2 * np.mean(R)
+    LCL = M - A2 * np.mean(R)
 
     fig, ax = plt.subplots(figsize=(10, 10))
     ax.plot(x_bar,
