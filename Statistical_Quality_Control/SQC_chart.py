@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-%matplotlib inline
+#%matplotlib inline
 
 def xbar_chart(D, thread_val):
     m = D.shape[0]
