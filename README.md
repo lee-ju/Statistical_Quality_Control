@@ -3,25 +3,45 @@
 ### 2022-01 SQC Colab Env
 #### !pip freeze
 > > > absl-py==1.0.0
+  
 > > > alabaster==0.7.12
+
 > > > albumentations==0.1.12
+
 > > > altair==4.2.0
+
 > > > appdirs==1.4.4
+
 > > > argon2-cffi==21.3.0
+
 > > > argon2-cffi-bindings==21.2.0
+
 > > > arviz==0.11.4
+
 > > > astor==0.8.1
+
 > > > astropy==4.3.1
+
 > > > astunparse==1.6.3
+
 > > > atari-py==0.2.9
+
 > > > atomicwrites==1.4.0
+
 > > > attrs==21.4.0
+
 > > > audioread==2.1.9
+
 > > > autograd==1.3
+
 > > > Babel==2.9.1
+
 > > > backcall==0.2.0
+
 > > > beautifulsoup4==4.6.3
+
 > > > bleach==4.1.0
+
 > > > blis==0.4.1
 > > > bokeh==2.3.3
 > > > Bottleneck==1.3.2
