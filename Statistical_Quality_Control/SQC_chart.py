@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 #%matplotlib inline
 
+fig0 = 10
+fig1 = 5
 def xbar_chart(D, A2):
     m = D.shape[0]
     x_bar = []
@@ -16,7 +18,7 @@ def xbar_chart(D, A2):
     UCL = M + A2 * np.mean(R)
     LCL = M - A2 * np.mean(R)
 
-    fig, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=(fig0, fig1))
     ax.plot(x_bar,
             linestyle='-', marker='o', color='black')
     ax.axhline(UCL,
@@ -40,7 +42,7 @@ def R_chart(D, D3, D4):
     UCL = D4 * Rbar
     LCL = D3 * Rbar
 
-    fig, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=(fig0, fig1))
     ax.plot(R,
             linestyle='-', marker='o', color='black')
     ax.axhline(UCL,
@@ -54,6 +56,9 @@ def R_chart(D, D3, D4):
     return round(Rbar, 4), round(UCL, 4), round(LCL, 4)
 
 if __name__ == '__main__':
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
     from Statistical_Quality_Control import SQC_chart
     D = pd.read_csv('/content/drive/MyDrive/Colab Notebooks/Data/Wafer0.csv')
     xbar_M, xbar_UCL, xbar_LCL = SQC_chart.xbar_chart(D=D, A2=0.577)
