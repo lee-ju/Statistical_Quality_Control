@@ -1,3 +1,40 @@
+## Installation
+
+`pip install git+https://github.com/lee-juStatistical_Quality_Control.git`
+
+## Usage
+
+#### Load Package
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+from Statistical_Quality_Control import SQC_chart
+```
+
+#### Example Data
+```python
+D = pd.read_csv('.../Wafer0.csv')
+
+# Xbar-R Chart
+xR_M, xR_UCL, xR_LCL = SQC_chart.xbar_R_chart(D=D, A2=0.577) # when n = 5
+print(xR_M, xR_UCL, xR_LCL)
+
+# R Chart
+R_R, R_UCL, R_LCL = SQC_chart.R_chart(D, D3=0, D4=2.114) # when n = 5
+print(R_R, R_UCL, R_LCL)
+
+# Xbar-s Chart
+xs_M, xs_UCL, xs_LCL = SQC_chart.xbar_s_chart(D=D, A3=1.427) # when n = 5
+print(xs_M, xs_UCL, xs_LCL)
+
+# s Chart
+s_s, s_UCL, s_LCL = SQC_chart.s_chart(D, B3=0, B4=2.089) # when n = 5
+print(s_s, s_UCL, s_LCL)
+
+```
+
 # Statistical_Quality_Control
 
 ### 2022-01 SQC Colab Env
