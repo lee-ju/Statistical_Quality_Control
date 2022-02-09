@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from Statistical_Quality_Control import SQC_chart
 ```
 
-#### Example Data
+#### Example for Variables Control Chart
 ```python
 D = pd.read_csv('.../Wafer0.csv')
 
@@ -34,10 +34,16 @@ s_s, s_UCL, s_LCL = SQC_chart.s_chart(D, B3=0, B4=2.089) # when n = 5
 print(s_s, s_UCL, s_LCL)
 
 ```
+#### Example for Attributes Control Chart
+```python
+D = pd.read_csv('.../Wafer0.csv')
+
+# ...
+```
 
 ## Statistical_Quality_Control
 
-### 2022-01 SQC Colab Env
+#### 2022-01 SQC Colab Env
 #### !pip freeze
 #### absl-py==1.0.0
 #### alabaster==0.7.12
