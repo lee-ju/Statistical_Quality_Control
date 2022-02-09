@@ -35,7 +35,7 @@ print(s_s, s_UCL, s_LCL)
 
 ```
 
-# Statistical_Quality_Control
+## Statistical_Quality_Control
 
 ### 2022-01 SQC Colab Env
 #### !pip freeze
