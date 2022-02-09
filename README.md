@@ -1,6 +1,6 @@
 ## Installation
 
-`pip install git+https://github.com/lee-juStatistical_Quality_Control.git`
+`pip install git+https://github.com/lee-ju/Statistical_Quality_Control.git`
 
 ## Usage
 
