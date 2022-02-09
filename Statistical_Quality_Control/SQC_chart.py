@@ -5,18 +5,19 @@ import matplotlib.pyplot as plt
 
 fig0 = 10
 fig1 = 5
-def xbar_chart(D, A2):
+def xbar_R_chart(D, A2):
     m = D.shape[0]
     x_bar = []
-    R = []
+    r = []
     for i in range(m):
         mi = D.iloc[i, 1:].values
         x_bar.append(mi.mean())
-        R.append(mi.max() - mi.min())
+        r.append(mi.max() - mi.min())
 
-    M = np.mean(x_bar)
-    UCL = M + A2 * np.mean(R)
-    LCL = M - A2 * np.mean(R)
+    x_barbar = np.mean(x_bar)
+    r_bar = np.mean(r)
+    UCL = x_barbar + A2 * r_bar
+    LCL = x_barbar - A2 * r_bar
 
     fig, ax = plt.subplots(figsize=(fig0, fig1))
     ax.plot(x_bar,
@@ -25,35 +26,35 @@ def xbar_chart(D, A2):
             linestyle='dashed', color='red')
     ax.axhline(LCL,
             linestyle='dashed', color='red')
-    ax.axhline(M,
+    ax.axhline(x_barbar,
             linestyle='dashed', color='blue')
-    ax.set_title('X-bar chart')
+    ax.set_title(r'$\barX$ chart')
     ax.set(xlabel='Group', ylabel='Average')
-    return round(M, 4), round(UCL, 4), round(LCL, 4)
+    return round(x_barbar, 4), round(UCL, 4), round(LCL, 4)
 
 def R_chart(D, D3, D4):
     m = D.shape[0]
-    R = []
+    r = []
     for i in range(m):
         mi = D.iloc[i, 1:].values
-        R.append(mi.max() - mi.min())
+        r.append(mi.max() - mi.min())
 
-    Rbar = np.mean(R)
-    UCL = D4 * Rbar
-    LCL = D3 * Rbar
+    r_bar = np.mean(r)
+    UCL = D4 * r_bar
+    LCL = D3 * r_bar
 
     fig, ax = plt.subplots(figsize=(fig0, fig1))
-    ax.plot(R,
+    ax.plot(r,
             linestyle='-', marker='o', color='black')
     ax.axhline(UCL,
             linestyle='dashed', color='red')
     ax.axhline(LCL,
             linestyle='dashed', color='red')
-    ax.axhline(Rbar,
+    ax.axhline(r_bar,
             linestyle='dashed', color='blue')
     ax.set_title('R chart')
     ax.set(xlabel='Group', ylabel='Range')
-    return round(Rbar, 4), round(UCL, 4), round(LCL, 4)
+    return round(r_bar, 4), round(UCL, 4), round(LCL, 4)
 
 if __name__ == '__main__':
     import numpy as np
@@ -61,8 +62,8 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     from Statistical_Quality_Control import SQC_chart
     D = pd.read_csv('/content/drive/MyDrive/Colab Notebooks/Data/Wafer0.csv')
-    xbar_M, xbar_UCL, xbar_LCL = SQC_chart.xbar_chart(D=D, A2=0.577)
-    print(xbar_M, xbar_UCL, xbar_LCL)
+    xR_M, xR_UCL, xR_LCL = SQC_chart.xbar_R_chart(D=D, A2=0.577)
+    print(xR_M, xR_UCL, xR_LCL)
     
-    R_Rbar, R_UCL, R_LCL = R_chart(D, D3=0, D4=2.114)
-    print(R_Rbar, R_UCL, R_LCL)
+    R_R, R_UCL, R_LCL = SQC_chart.R_chart(D, D3=0, D4=2.114)
+    print(R_R, R_UCL, R_LCL)
