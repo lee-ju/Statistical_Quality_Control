@@ -12,15 +12,15 @@ import matplotlib.pyplot as plt
 
 from Statistical_Quality_Control import SQC_chart
 ```
-- `Example Data` Sources: Montgomery, D. C. (2007). Introduction to statistical quality control. John Wiley & Sons.
+#### Example data
+- `Source`: Montgomery, D. C. (2007). Introduction to statistical quality control. John Wiley & Sons.
     1. `Wafer0.csv`: Table 6.1
     2. `Orange0.csv`: Table 7.1
     3. `Circuit0.csv`: Table 7.7
     4. `Chain0.csv`: Table 7.10
 
-#### Example for Variables Control Chart
+#### Example for Variables Control Chart: Xbar-R Chart
 ```python
-# Xbar-R Chart
 D = pd.read_csv('.../Wafer0.csv')
 xR_M, xR_UCL, xR_LCL = SQC_chart.xbar_R_chart(D=D, A2=0.577) # when n = 5
 print(xR_M, xR_UCL, xR_LCL)
@@ -29,8 +29,8 @@ print(xR_M, xR_UCL, xR_LCL)
     1. `D`: Data to visualize the chart (must be in the same format as wafer0.csv).
     2. `A2`: Factor for Xbar-R Chart.
 
+#### Example for Variables Control Chart: R Chart
 ```python
-# R Chart
 D = pd.read_csv('.../Wafer0.csv')
 R_R, R_UCL, R_LCL = SQC_chart.R_chart(D=D, D3=0, D4=2.114) # when n = 5
 print(R_R, R_UCL, R_LCL)
@@ -40,8 +40,8 @@ print(R_R, R_UCL, R_LCL)
     2. `D3`: Factor of LCL for R Chart.
     3. `D4`: Factor of UCL for R Chart.
 
+#### Example for Variables Control Chart: Xbar-s Chart
 ```python
-# Xbar-s Chart
 D = pd.read_csv('.../Wafer0.csv')
 xs_M, xs_UCL, xs_LCL = SQC_chart.xbar_s_chart(D=D, A3=1.427) # when n = 5
 print(xs_M, xs_UCL, xs_LCL)
@@ -50,8 +50,8 @@ print(xs_M, xs_UCL, xs_LCL)
     1. `D`: Data to visualize the chart (must be in the same format as wafer0.csv).
     2. `A3`: Factor for Xbar-s Chart.
 
+#### Example for Variables Control Chart: s Chart
 ```python
-# s Chart
 D = pd.read_csv('.../Wafer0.csv')
 s_s, s_UCL, s_LCL = SQC_chart.s_chart(D=D, B3=0, B4=2.089) # when n = 5
 print(s_s, s_UCL, s_LCL)
@@ -61,9 +61,8 @@ print(s_s, s_UCL, s_LCL)
     2. `B3`: Factor of LCL for s Chart.
     3. `B4`: Factor of UCL for s Chart.
 
-#### Example for Attributes Control Chart
+#### Example for Attributes Control Chart: p Chart
 ```python
-# p Chart
 D = pd.read_csv('.../Orange0.csv')
 pbar, p_UCL, p_LCL = SQC_chart.p_chart(D=D, n=50, var='pi')
 print(pbar, p_UCL, p_LCL)
@@ -73,8 +72,8 @@ print(pbar, p_UCL, p_LCL)
     2. `n`: Number of Bernoulli trials.
     3. `var`: The name of the variable representing "sample fraction nonconforming" in D (default: 'pi')
 
+#### Example for Attributes Control Chart: np Chart
 ```python
-# np Chart
 D = pd.read_csv('.../Orange0.csv')
 npbar, np_UCL, np_LCL = SQC_chart.np_chart(D=D, n=50, var='pi')
 print(npbar, np_UCL, np_LCL)
@@ -84,8 +83,8 @@ print(npbar, np_UCL, np_LCL)
     2. `n`: Number of Bernoulli trials.
     3. `var`: The name of the variable representing "sample fraction nonconforming" in D (default: 'pi') 
 
+#### Example for Attributes Control Chart: c Chart
 ```python
-# c Chart
 D = pd.read_csv('.../Circuit0.csv')
 cbar, c_UCL, c_LCL = SQC_chart.c_chart(D=D, var='N')
 print(cbar, c_UCL, c_LCL)
@@ -94,8 +93,8 @@ print(cbar, c_UCL, c_LCL)
     1. `D`: Data to visualize the chart (must be in the same format as Circuit0.csv).
     2. `var`: The name of the variable representing "number of nonconformities" in D (default: 'N')
 
+#### Example for Attributes Control Chart: u Chart
 ```python
-# u Chart
 D = pd.read_csv('.../Chain0.csv')
 ubar, u_UCL, u_LCL = SQC_chart.u_chart(D=D, n=50, var='avg_err')
 print(ubar, u_UCL, u_LCL)
