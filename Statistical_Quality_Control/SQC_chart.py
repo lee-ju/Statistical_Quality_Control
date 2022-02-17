@@ -180,9 +180,9 @@ if __name__ == '__main__':
     D = pd.read_csv('/content/drive/MyDrive/Colab Notebooks/Data/Orange0.csv')
     
     # p Chart
-    pbar, p_UCL, p_LCL = p_chart(D=D, n=50, var='pi')
+    pbar, p_UCL, p_LCL = SQC_chart.p_chart(D=D, n=50, var='pi')
     print(pbar, p_UCL, p_LCL)
 
     # np Chart
-    npbar, np_UCL, np_LCL = np_chart(D=D, n=50, var='pi')
+    npbar, np_UCL, np_LCL = SQC_chart.np_chart(D=D, n=50, var='pi')
     print(npbar, np_UCL, np_LCL)
