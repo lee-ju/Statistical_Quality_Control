@@ -15,31 +15,69 @@ from Statistical_Quality_Control import SQC_chart
 
 #### Example for Variables Control Chart
 ```python
-D = pd.read_csv('.../Wafer0.csv')
-
 # Xbar-R Chart
+D = pd.read_csv('.../Wafer0.csv')
 xR_M, xR_UCL, xR_LCL = SQC_chart.xbar_R_chart(D=D, A2=0.577) # when n = 5
 print(xR_M, xR_UCL, xR_LCL)
+```
+- `D` and `A2` meaning:
+    1. `D`: Data to visualize the chart (must be in the same format as wafer0.csv).
+    2. `A2`: Factor for Xbar-R Chart.
 
+```python
 # R Chart
+D = pd.read_csv('.../Wafer0.csv')
 R_R, R_UCL, R_LCL = SQC_chart.R_chart(D, D3=0, D4=2.114) # when n = 5
 print(R_R, R_UCL, R_LCL)
+```
+- `D`, `D3`, and `D4` meaning:
+    1. `D`: Data to visualize the chart (must be in the same format as wafer0.csv).
+    2. `D3`: Factor of LCL for R Chart.
+    3. `D4`: Factor of UCL for R Chart.
 
+```python
 # Xbar-s Chart
+D = pd.read_csv('.../Wafer0.csv')
 xs_M, xs_UCL, xs_LCL = SQC_chart.xbar_s_chart(D=D, A3=1.427) # when n = 5
 print(xs_M, xs_UCL, xs_LCL)
+```
+- `D` and `A2` meaning:
+    1. `D`: Data to visualize the chart (must be in the same format as wafer0.csv).
+    2. `A3`: Factor for Xbar-s Chart.
 
+```python
 # s Chart
+D = pd.read_csv('.../Wafer0.csv')
 s_s, s_UCL, s_LCL = SQC_chart.s_chart(D, B3=0, B4=2.089) # when n = 5
 print(s_s, s_UCL, s_LCL)
-
 ```
+- `D`, `B3`, and `B4` meaning:
+    1. `D`: Data to visualize the chart (must be in the same format as wafer0.csv).
+    2. `B3`: Factor of LCL for s Chart.
+    3. `B4`: Factor of UCL for s Chart.
+
 #### Example for Attributes Control Chart
 ```python
-D = pd.read_csv('.../Wafer0.csv')
-
-# ...
+# p Chart
+D = pd.read_csv('.../Orange0.csv')
+pbar, p_UCL, p_LCL = SQC_chart.p_chart(D, n=50, var='pi')
+print(pbar, p_UCL, p_LCL)
 ```
+- `D`, `n`, and `pi` meaning:
+    1. `D`: Data to visualize the chart (must be in the same format as wafer0.csv).
+    2. `n`: Number of Bernoulli trials.
+    3. `pi`: The name of the variable representing "sample fraction nonconforming" in D(default: 'pi')
+
+```python
+# np Chart
+D = pd.read_csv('.../Orange0.csv')
+npbar, np_UCL, np_LCL = SQC_chart.np_chart(D, n=50, var='pi')
+print(npbar, np_UCL, np_LCL)
+```
+- `D`, `n`, and `pi` meaning:
+    1. `D`: Data to visualize the chart (must be in the same format as wafer0.csv).
+    2. `n`: Number of Bernoulli trials.
+    3. `pi`: The name of the variable representing "sample fraction nonconforming" in D(default: 'pi') 
 
 ## Statistical_Quality_Control
 
