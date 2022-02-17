@@ -7,7 +7,8 @@ fig0 = 10
 fig1 = 5
 
 def xbar_R_chart(D, A2):
-    '''Xbar-R Chart for Statistical Quality Control
+    '''
+    Xbar-R Chart for Statistical Quality Control
   
     Parameters
     ----------
@@ -19,7 +20,13 @@ def xbar_R_chart(D, A2):
       
     Returns
     -------
-    avg.x_bar, UCL of x_bar, LCL of x_bar
+    avg.x_bar : float
+                average of x_bar
+                
+    UCL of x_bar : float
+                   Upper Control Limit of x_bar
+    LCL of x_bar : float
+                   Lower Control Limit of x_bar
     '''
     m = D.shape[0]
     x_bar = []
