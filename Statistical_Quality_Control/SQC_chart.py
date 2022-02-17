@@ -107,24 +107,82 @@ def s_chart(D, B3, B4):
     ax.set(xlabel='Group', ylabel='Range')
     return round(s_bar, 4), round(UCL, 4), round(LCL, 4)
 
+def p_chart(D, n, var='pi'):
+    p = D[var].values
+    pbar = p.mean()
+    UCL = pbar + 3 * np.sqrt(pbar * (1 - pbar) / n)
+    LCL = pbar - 3 * np.sqrt(pbar * (1 - pbar) / n)
+    fig, ax = plt.subplots(figsize=(fig0, fig1))
+    ax.plot(p,
+            linestyle='-', marker='o', color='black')
+    ax.axhline(UCL,
+            linestyle='dashed', color='red')
+    ax.axhline(LCL,
+            linestyle='dashed', color='red')
+    ax.axhline(pbar,
+            linestyle='dashed', color='blue')
+    ax.set_title(r'p chart')
+    ax.set(xlabel='Sample number',
+           ylabel='Sample fraction nonconforming, $\^p$')
+    return round(pbar, 4), round(UCL, 4), round(LCL, 4)
+
+def np_chart(D, n, var='pi'):
+    p = D[var].values
+    pbar = p.mean()
+    UCL = n * pbar + 3 * np.sqrt(n * pbar * (1 - pbar))
+    LCL = n * pbar - 3 * np.sqrt(n * pbar * (1 - pbar))
+    fig, ax = plt.subplots(figsize=(fig0, fig1))
+    ax.plot(n * p,
+            linestyle='-', marker='o', color='black')
+    ax.axhline(UCL,
+            linestyle='dashed', color='red')
+    ax.axhline(LCL,
+            linestyle='dashed', color='red')
+    ax.axhline(n * pbar,
+            linestyle='dashed', color='blue')
+    ax.set_title(r'np chart')
+    ax.set(xlabel='Sample number',
+           ylabel='Sample fraction nonconforming, $\^p$')
+    return round(n * pbar, 4), round(UCL, 4), round(LCL, 4)
+
 if __name__ == '__main__':
+    # - - Control Charts for Variables
     import numpy as np
     import pandas as pd
     import matplotlib.pyplot as plt
+    from Statistical_Quality_Control import SQC_chart
+
     D = pd.read_csv('/content/drive/MyDrive/Colab Notebooks/Data/Wafer0.csv')
     
     # Xbar-R Chart
-    xR_M, xR_UCL, xR_LCL = xbar_R_chart(D=D, A2=0.577)
+    xR_M, xR_UCL, xR_LCL = SQC_chart.xbar_R_chart(D=D, A2=0.577)
     print(xR_M, xR_UCL, xR_LCL)
     
     # R Chart
-    R_R, R_UCL, R_LCL = R_chart(D, D3=0, D4=2.114)
+    R_R, R_UCL, R_LCL = SQC_chart.R_chart(D, D3=0, D4=2.114)
     print(R_R, R_UCL, R_LCL)
     
     # Xbar-s Chart
-    xs_M, xs_UCL, xs_LCL = xbar_s_chart(D=D, A3=1.427)
+    xs_M, xs_UCL, xs_LCL = SQC_chart.xbar_s_chart(D=D, A3=1.427)
     print(xs_M, xs_UCL, xs_LCL)
     
     # s Chart
-    s_s, s_UCL, s_LCL = s_chart(D, B3=0, B4=2.089)
+    s_s, s_UCL, s_LCL = SQC_chart.s_chart(D, B3=0, B4=2.089)
     print(s_s, s_UCL, s_LCL)
+    
+if __name__ == '__main__':
+    # - - Control Charts for Attributes
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    from Statistical_Quality_Control import SQC_chart
+
+    D = pd.read_csv('/content/drive/MyDrive/Colab Notebooks/Data/Orange0.csv')
+    
+    # p Chart
+    pbar, p_UCL, p_LCL = p_chart(D=D, n=50, var='pi')
+    print(pbar, p_UCL, p_LCL)
+
+    # np Chart
+    npbar, np_UCL, np_LCL = np_chart(D=D, n=50, var='pi')
+    print(npbar, np_UCL, np_LCL)
