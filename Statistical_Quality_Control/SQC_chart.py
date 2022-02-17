@@ -9,6 +9,7 @@ def xbar_R_chart(D, A2):
     m = D.shape[0]
     x_bar = []
     r = []
+    
     for i in range(m):
         mi = D.iloc[i, 1:].values
         x_bar.append(mi.mean())
@@ -35,6 +36,7 @@ def xbar_R_chart(D, A2):
 def R_chart(D, D3, D4):
     m = D.shape[0]
     r = []
+    
     for i in range(m):
         mi = D.iloc[i, 1:].values
         r.append(mi.max() - mi.min())
@@ -60,6 +62,7 @@ def xbar_s_chart(D, A3):
     m = D.shape[0]
     x_bar = []
     s = []
+    
     for i in range(m):
         mi = D.iloc[i, 1:].values
         x_bar.append(mi.mean())
@@ -86,6 +89,7 @@ def xbar_s_chart(D, A3):
 def s_chart(D, B3, B4):
     m = D.shape[0]
     s = []
+    
     for i in range(m):
         mi = D.iloc[i, 1:].values
         s.append(mi.std())
@@ -110,8 +114,12 @@ def s_chart(D, B3, B4):
 def p_chart(D, n, var='pi'):
     p = D[var].values
     pbar = p.mean()
+    
     UCL = pbar + 3 * np.sqrt(pbar * (1 - pbar) / n)
     LCL = pbar - 3 * np.sqrt(pbar * (1 - pbar) / n)
+    if LCL < 0:
+        LCL = 0
+
     fig, ax = plt.subplots(figsize=(fig0, fig1))
     ax.plot(p,
             linestyle='-', marker='o', color='black')
@@ -129,8 +137,10 @@ def p_chart(D, n, var='pi'):
 def np_chart(D, n, var='pi'):
     p = D[var].values
     pbar = p.mean()
+    
     UCL = n * pbar + 3 * np.sqrt(n * pbar * (1 - pbar))
     LCL = n * pbar - 3 * np.sqrt(n * pbar * (1 - pbar))
+    
     fig, ax = plt.subplots(figsize=(fig0, fig1))
     ax.plot(n * p,
             linestyle='-', marker='o', color='black')
@@ -145,6 +155,51 @@ def np_chart(D, n, var='pi'):
            ylabel='Sample fraction nonconforming, $\^p$')
     return round(n * pbar, 4), round(UCL, 4), round(LCL, 4)
 
+def c_chart(D, var='N'):
+    c = D[var].values
+    N = D.shape[0]
+
+    cbar = np.sum(c)/N
+    UCL = cbar + 3 * np.sqrt(cbar)
+    LCL = cbar - 3 * np.sqrt(cbar)
+
+    fig, ax = plt.subplots(figsize=(fig0, fig1))
+    ax.plot(c,
+            linestyle='-', marker='o', color='black')
+    ax.axhline(UCL,
+               linestyle='dashed', color='red')
+    ax.axhline(LCL,
+               linestyle='dashed', color='red')
+    ax.axhline(cbar,
+               linestyle='dashed', color='blue')
+    ax.set_title(r'c chart')
+    ax.set(xlabel='Sample number',
+           ylabel='Number of nonconformities')
+    return round(cbar, 4), round(UCL, 4), round(LCL, 4)
+
+def u_chart(D, n, var='avg_err'):
+    u = D[var].values
+    ubar = u.mean()
+
+    UCL = ubar + 3 * np.sqrt(ubar / n)
+    LCL = ubar - 3 * np.sqrt(ubar / n)
+    if LCL < 0:
+        LCL = 0
+
+    fig, ax = plt.subplots(figsize=(fig0, fig1))
+    ax.plot(u,
+            linestyle='-', marker='o', color='black')
+    ax.axhline(UCL,
+               linestyle='dashed', color='red')
+    ax.axhline(LCL,
+               linestyle='dashed', color='red')
+    ax.axhline(ubar,
+               linestyle='dashed', color='blue')
+    ax.set_title(r'u chart')
+    ax.set(xlabel='Sample number',
+           ylabel='Error/unit')
+    return round(ubar, 4), round(UCL, 4), round(LCL, 4)
+
 if __name__ == '__main__':
     # - - Control Charts for Variables
     import numpy as np
@@ -153,7 +208,6 @@ if __name__ == '__main__':
     from Statistical_Quality_Control import SQC_chart
 
     D = pd.read_csv('.../Wafer0.csv')
-    
     # Xbar-R Chart
     xR_M, xR_UCL, xR_LCL = SQC_chart.xbar_R_chart(D=D, A2=0.577)
     print(xR_M, xR_UCL, xR_LCL)
@@ -178,7 +232,6 @@ if __name__ == '__main__':
     from Statistical_Quality_Control import SQC_chart
 
     D = pd.read_csv('.../Orange0.csv')
-    
     # p Chart
     pbar, p_UCL, p_LCL = SQC_chart.p_chart(D=D, n=50, var='pi')
     print(pbar, p_UCL, p_LCL)
@@ -186,3 +239,12 @@ if __name__ == '__main__':
     # np Chart
     npbar, np_UCL, np_LCL = SQC_chart.np_chart(D=D, n=50, var='pi')
     print(npbar, np_UCL, np_LCL)
+    
+    D = pd.read_csv('.../Chain0.csv')
+    # c Chart
+    cbar, c_UCL, c_LCL = SQC_chart.c_chart(D=D, var='N')
+    print(cbar, c_UCL, c_LCL)
+
+    # u Chart
+    ubar, u_UCL, u_LCL = SQC_chart.u_chart(D=D, n=50, var='avg_err')
+    print(ubar, u_UCL, u_LCL)
