@@ -152,7 +152,7 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     from Statistical_Quality_Control import SQC_chart
 
-    D = pd.read_csv('/content/drive/MyDrive/Colab Notebooks/Data/Wafer0.csv')
+    D = pd.read_csv('.../Wafer0.csv')
     
     # Xbar-R Chart
     xR_M, xR_UCL, xR_LCL = SQC_chart.xbar_R_chart(D=D, A2=0.577)
@@ -177,7 +177,7 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     from Statistical_Quality_Control import SQC_chart
 
-    D = pd.read_csv('/content/drive/MyDrive/Colab Notebooks/Data/Orange0.csv')
+    D = pd.read_csv('.../Orange0.csv')
     
     # p Chart
     pbar, p_UCL, p_LCL = SQC_chart.p_chart(D=D, n=50, var='pi')
