@@ -347,18 +347,15 @@ def c_chart(D, var='N'):
            ylabel='Number of nonconformities')
     return round(cbar, 4), round(UCL, 4), round(LCL, 4)
 
-def u_chart(D, n, var='avg_err'):
+def u_chart(D, var='avg_err'):
     '''
-    c Chart for Statistical Quality Control
+    u Chart for Statistical Quality Control
   
     Parameters
     ----------
     D : pandas.DataFrame
         Data to visualize the chart
         
-    n : integer
-        Number of Bernoulli trials
-         
     var : character
           The name of the variable representing
           "average number of erros" in D (default: 'avg_err')
@@ -375,10 +372,11 @@ def u_chart(D, n, var='avg_err'):
           Lower Control Limit of u Chart
     '''
     u = D[var].values
+    m = D.shape[0]
     ubar = u.mean()
 
-    UCL = ubar + 3 * np.sqrt(ubar / n)
-    LCL = ubar - 3 * np.sqrt(ubar / n)
+    UCL = ubar + 3 * np.sqrt(ubar / m)
+    LCL = ubar - 3 * np.sqrt(ubar / m)
     if LCL < 0:
         LCL = 0
 
@@ -442,5 +440,5 @@ if __name__ == '__main__':
     print(cbar, c_UCL, c_LCL)
 
     # u Chart
-    ubar, u_UCL, u_LCL = SQC_chart.u_chart(D=D, n=50, var='avg_err')
+    ubar, u_UCL, u_LCL = SQC_chart.u_chart(D=D, var='avg_err')
     print(ubar, u_UCL, u_LCL)
