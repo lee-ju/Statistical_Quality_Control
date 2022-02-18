@@ -96,12 +96,13 @@ print(cbar, c_UCL, c_LCL)
 #### Example for Attributes Control Chart: u Chart
 ```python
 D = pd.read_csv('.../Chain0.csv')
-ubar, u_UCL, u_LCL = SQC_chart.u_chart(D=D, var='avg_err')
+ubar, u_UCL, u_LCL = SQC_chart.u_chart(D=D, n=50, var='avg_err')
 print(ubar, u_UCL, u_LCL)
 ```
-- `D` and `var` meaning:
+- `D`, `n`, and `var` meaning:
     1. `D`: Data to visualize the chart (must be in the same format as Chain0.csv).
-    2. `var`: The name of the variable representing "average number of erros" in D (default: 'avg_err')
+    2. `n`: Number of samples
+    3. `var`: The name of the variable representing "average number of erros" in D (default: 'avg_err')
 
 ## Statistical_Quality_Control
 
