@@ -46,7 +46,7 @@ D = pd.read_csv('.../Wafer0.csv')
 xs_M, xs_UCL, xs_LCL = SQC_chart.xbar_s_chart(D=D, A3=1.427) # when n = 5
 print(xs_M, xs_UCL, xs_LCL)
 ```
-- `D` and `A2` meaning:
+- `D` and `A3` meaning:
     1. `D`: Data to visualize the chart (must be in the same format as wafer0.csv).
     2. `A3`: Factor for Xbar-s Chart.
 
