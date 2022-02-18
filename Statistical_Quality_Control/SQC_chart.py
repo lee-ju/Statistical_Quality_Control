@@ -7,6 +7,28 @@ fig0 = 10
 fig1 = 5
 
 def xbar_R_chart(D, A2):
+    '''
+    Xbar-R Chart for Statistical Quality Control
+  
+    Parameters
+    ----------
+    D : pandas.DataFrame
+        Data to visualize the chart
+        
+    A2 : float
+         Factor for Xbar-R Chart
+      
+    Returns
+    -------
+    avg.x_bar : float
+                average of x_bar
+                
+    UCL : float
+          Upper Control Limit of Xbar-R Chart
+          
+    LCL : float
+          Lower Control Limit of Xbar-R Chart
+    '''
     m = D.shape[0]
     x_bar = []
     r = []
@@ -35,6 +57,31 @@ def xbar_R_chart(D, A2):
     return round(x_barbar, 4), round(UCL, 4), round(LCL, 4)
 
 def R_chart(D, D3, D4):
+    '''
+    R Chart for Statistical Quality Control
+  
+    Parameters
+    ----------
+    D : pandas.DataFrame
+        Data to visualize the chart
+        
+    D3 : float
+         Factor of LCL for R Chart
+         
+    D4 : float
+         Factor of UCL for R Chart
+      
+    Returns
+    -------
+    avg.R : float
+            average of Range
+                
+    UCL : float
+          Upper Control Limit of R Chart
+          
+    LCL : float
+          Lower Control Limit of R Chart
+    '''
     m = D.shape[0]
     r = []
     
@@ -60,6 +107,28 @@ def R_chart(D, D3, D4):
     return round(r_bar, 4), round(UCL, 4), round(LCL, 4)
 
 def xbar_s_chart(D, A3):
+    '''
+    Xbar-s Chart for Statistical Quality Control
+  
+    Parameters
+    ----------
+    D : pandas.DataFrame
+        Data to visualize the chart
+        
+    A3 : float
+         Factor for Xbar-s Chart
+      
+    Returns
+    -------
+    avg.x_bar : float
+                average of x_bar with std
+                
+    UCL : float
+          Upper Control Limit of Xbar-s Chart
+          
+    LCL : float
+          Lower Control Limit of Xbar-s Chart
+    '''
     m = D.shape[0]
     x_bar = []
     s = []
@@ -88,6 +157,31 @@ def xbar_s_chart(D, A3):
     return round(x_barbar, 4), round(UCL, 4), round(LCL, 4)
 
 def s_chart(D, B3, B4):
+    '''
+    s Chart for Statistical Quality Control
+  
+    Parameters
+    ----------
+    D : pandas.DataFrame
+        Data to visualize the chart
+        
+    B3 : float
+         Factor of LCL for s Chart
+         
+    B4 : float
+         Factor of UCL for s Chart
+      
+    Returns
+    -------
+    avg.s : float
+            average of Std
+                
+    UCL : float
+          Upper Control Limit of s Chart
+          
+    LCL : float
+          Lower Control Limit of s Chart
+    '''
     m = D.shape[0]
     s = []
     
@@ -113,6 +207,32 @@ def s_chart(D, B3, B4):
     return round(s_bar, 4), round(UCL, 4), round(LCL, 4)
 
 def p_chart(D, n, var='pi'):
+    '''
+    p Chart for Statistical Quality Control
+  
+    Parameters
+    ----------
+    D : pandas.DataFrame
+        Data to visualize the chart
+        
+    n : integer
+        Number of Bernoulli trials
+         
+    var : character
+          The name of the variable representing
+          "sample fraction nonconforming" in D (default: 'pi')
+         
+    Returns
+    -------
+    avg.p : float
+            average of Fraction nonconforming (=p)
+                
+    UCL : float
+          Upper Control Limit of p Chart
+          
+    LCL : float
+          Lower Control Limit of p Chart
+    '''
     p = D[var].values
     pbar = p.mean()
     
@@ -136,6 +256,32 @@ def p_chart(D, n, var='pi'):
     return round(pbar, 4), round(UCL, 4), round(LCL, 4)
 
 def np_chart(D, n, var='pi'):
+    '''
+    np Chart for Statistical Quality Control
+  
+    Parameters
+    ----------
+    D : pandas.DataFrame
+        Data to visualize the chart
+        
+    n : integer
+        Number of Bernoulli trials
+         
+    var : character
+          The name of the variable representing
+          "sample fraction nonconforming" in D (default: 'pi')
+         
+    Returns
+    -------
+    n * avg.p : float
+                n * average of Fraction nonconforming (=p)
+                
+    UCL : float
+          Upper Control Limit of np Chart
+          
+    LCL : float
+          Lower Control Limit of np Chart
+    '''
     p = D[var].values
     pbar = p.mean()
     
@@ -157,6 +303,29 @@ def np_chart(D, n, var='pi'):
     return round(n * pbar, 4), round(UCL, 4), round(LCL, 4)
 
 def c_chart(D, var='N'):
+    '''
+    c Chart for Statistical Quality Control
+  
+    Parameters
+    ----------
+    D : pandas.DataFrame
+        Data to visualize the chart
+        
+    var : character
+          The name of the variable representing
+          "number of nonconformities" in D (default: 'N')
+         
+    Returns
+    -------
+    avg.c : float
+            average of nonconformities
+                
+    UCL : float
+          Upper Control Limit of c Chart
+          
+    LCL : float
+          Lower Control Limit of c Chart
+    '''
     c = D[var].values
     N = D.shape[0]
 
@@ -179,6 +348,32 @@ def c_chart(D, var='N'):
     return round(cbar, 4), round(UCL, 4), round(LCL, 4)
 
 def u_chart(D, n, var='avg_err'):
+    '''
+    c Chart for Statistical Quality Control
+  
+    Parameters
+    ----------
+    D : pandas.DataFrame
+        Data to visualize the chart
+        
+    n : integer
+        Number of Bernoulli trials
+         
+    var : character
+          The name of the variable representing
+          "average number of erros" in D (default: 'avg_err')
+         
+    Returns
+    -------
+    avg.u : float
+            average of the number of errors per unit
+            
+    UCL : float
+          Upper Control Limit of u Chart
+          
+    LCL : float
+          Lower Control Limit of u Chart
+    '''
     u = D[var].values
     ubar = u.mean()
 
