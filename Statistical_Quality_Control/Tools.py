@@ -4,8 +4,8 @@ from sklearn.metrics import confusion_matrix
 from sklearn.utils.multiclass import unique_labels
 
 def plot_confusion_matrix(y_true, y_pred, classes,
-                                title=None,
-                                cmap=plt.cm.Blues):
+                          title=None,
+                          cmap=plt.cm.Blues):
     # Compute confusion matrix
     cm = confusion_matrix(y_true, y_pred)
 
