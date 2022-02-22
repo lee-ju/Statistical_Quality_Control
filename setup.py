@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='Statistical_Quality_Control',
-    version='0.0.6',
+    version='0.0.7',
     description='SQC: for CJU',
     url='https://github.com/lee-ju/Statistical_Quality_Control.git',
     author='Juhyun Lee',
