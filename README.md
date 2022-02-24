@@ -2,7 +2,7 @@
 
 `pip install git+https://github.com/lee-ju/Statistical_Quality_Control.git`
 
-## Usage
+## Usage: SQC_chart
 
 #### Load Package
 ```python
@@ -103,6 +103,54 @@ print(ubar, u_UCL, u_LCL)
     1. `D`: Data to visualize the chart (must be in the same format as Chain0.csv).
     2. `n`: Number of samples
     3. `var`: The name of the variable representing "average number of erros" in D (default: 'avg_err')
+
+## Usage: Tools
+
+#### Load Package
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.utils.multiclass import unique_labels
+
+from Statistical_Quality_Control import Tools
+```
+#### Example: plot_confusion_matrix
+```python
+from tensorflow.keras.datasets import mnist
+(trn_X, trn_y), (tst_X, tst_y) = mnist.load_data()
+
+trn_y_oh = to_categorical(trn_y) # one-hot encoding
+tst_y_oh = to_categorical(tst_y)
+
+trn_X = trn_X / 255.0
+tst_X = tst_X / 255.0
+
+trn_X = trn_X.reshape(trn_n, trn_d * trn_d) # 60000 x 28 -> 60000 x 784
+tst_X = tst_X.reshape(tst_n, trn_d * trn_d)
+
+input_X = Input(shape=(trn_d * trn_d,)) # 784
+hidden1 = Dense(256, activation='relu')(input_X)
+hidden2 = Dense(64, activation='relu')(hidden1)
+hidden3 = Dense(16, activation='relu')(hidden2)
+output = Dense(10, activation='softmax')(hidden3)
+
+dnn_clf = Model(input_X, output)
+dnn_clf.compile(loss='categorical_crossentropy',
+                metrics=['accuracy'])
+                
+history = dnn_clf.fit(trn_X, trn_y_oh, epochs=10, batch_size=256)
+
+pred_y = dnn_clf.predict(tst_X)
+Tools.plot_confusion_matrix(y_true=tst_y, y_pred=np.argmax(pred_y, axis=1),
+                            classes=['0','1','2','3','4','5','6','7','8','9'],
+                            title='Confusion matrix of DNN')
+```
+- `y_true`, `y_pred`, `classes`, and `title` meaning:
+    1. `y_true`: Ground truth (correct) target values. array-like of shape (n_samples,)
+    2. `y_pred`: Estimated targets as returned by a classifier. array-like of shape (n_samples,)
+    3. `classes` : List of labels to index the matrix. array-like of shape (n_classes)
+    4. `title` : Title of confusion matrix. string
 
 ## Statistical_Quality_Control
 
