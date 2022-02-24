@@ -5,13 +5,18 @@ from sklearn.utils.multiclass import unique_labels
 
 def plot_confusion_matrix(y_true, y_pred, classes,
                           title=None,
+                          normalize=False,
                           cmap=plt.cm.Blues):
+
     # Compute confusion matrix
     cm = confusion_matrix(y_true, y_pred)
 
     # Only use the labels that appear in the data
     classes = np.array(classes)
     classes = classes[unique_labels(y_true, y_pred)]
+    
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
 
     fig, ax = plt.subplots()
     im = ax.imshow(cm, interpolation='nearest', cmap=cmap)
@@ -28,7 +33,10 @@ def plot_confusion_matrix(y_true, y_pred, classes,
              rotation_mode="anchor")
 
     # Loop over data dimensions and create text annotations.
-    fmt = 'd' # fmt = '.2f' if normalize else 'd'
+    if normalize:
+        fmt = '.2f'
+    else:
+        fmt = 'd'
     thresh = cm.max() / 2.
 
     for i in range(cm.shape[0]):
